@@ -122,9 +122,9 @@ diss.PRED = function( x, y, h, B=500, logarithm.x=FALSE, logarithm.y=FALSE,
     } else { #a model name or object is given
       for (ser in 1:N) {
         model <- NULL
-        if (models[[ser]] == "ets") {
+        if (class(models[[ser]])=="character" && models[[ser]] == "ets") {
           model <- forecast::ets(series[[ser]])
-        } else if (models[[ser]] == "arima") {
+        } else if (class(models[[ser]])=="character" && models[[ser]] == "arima") {
           model <- forecast::auto.arima(series[[ser]], stepwise = FALSE, approximation = FALSE)
         } else {
           model <- models[[ser]]
