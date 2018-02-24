@@ -47,7 +47,7 @@ differences.x=0, differences.y=0, plot=FALSE, models = NULL)
 	If \code{TRUE}, plot the resulting forecast densities.
 }
 \item{models}{
-  A list containing either \code{"ets"}, \code{"arima"} or a fitted model object from the \code{forecast} package. The list must have one element per series. In the case of the \code{x} and \code{y} version, a list with two elements.
+  A list containing either \code{"ets"}, \code{"arima"} or a fitted model object from the \code{forecast} package. The list must have one element per series. In the case of the \code{x} and \code{y} version, a list with two elements. If models is not null \code{logarithm} and \code{differences} parameters are ignored.
 }
 
 }
@@ -56,7 +56,7 @@ differences.x=0, differences.y=0, plot=FALSE, models = NULL)
 
 The dissimilarity between the time series \code{x} and \code{y}  is given by \deqn{ d(x,y) = \int{ | f_{x,h}(u) - f_{y,h}(u) | du} } where \eqn{f_{x,h}}{ d(x,y) = INT( | f_{x,h}(u) - f_{y,h}(u) )du} and \eqn{f_{y,h}} are kernel density estimators of the forecast densities h-steps ahead of \code{x} and \code{y}, respectively. The horizon of interest h is pre-specified by the user.
 If \code{models} is specified, the given model for each series is used for obtaining 
-the forecast densities. Currenly, each element of the \code{models} list can be \code{"ets"}, which will fit a ets model using the function \code{ets} in the \code{forecast} package. If the element of \code{models} is "arima", an ARIMA model using \code{auto.arima} of the forecast package will be used. Finally, the elements of models can be a fitted model on the series using a method from the \code{forecast} package.
+the forecast densities. Currently, each element of the \code{models} list can be the string \code{"ets"}, which will fit a ets model using the function \code{ets} in the \code{forecast} package. If the element of \code{models} is the string "arima", an ARIMA model using \code{auto.arima} from the forecast package will be used. Finally, the elements of models can be a fitted model on the series using a method from the \code{forecast} package which can be simulated, see \code{link[forecast]{simulate.ets}}.
 The kernel density estimators are based on B bootstrap replicates obtained by using a resampling procedure that mimics the generating processes, which are assumed to follow an arbitrary autoregressive structure (parametric or non-parametric). The procedure is completely detailed in Vilar et al. (2010). This function has high computational cost due to the bootstrapping procedure. 
 
 The procedure uses a bootstrap method that requires stationary time series. In order to support a wider range of time series, the method allows some transformations on the series before proceeding with the bootstrap resampling. This transformations are inverted before calculating the densities. The transformations allowed are logarithm and differenciation.
@@ -95,7 +95,7 @@ José Antonio Vilar, Pablo Montero Manso.
 %%  ~~who you are~~
 }
 \seealso{
- \code{\link{diss}}
+ \code{\link{diss}}, \code{link[forecast]{auto.arima}}, \code{link[forecast]{ets}}, \code{link[forecast]{simulate.ets}}
 }
 \examples{
 x <- (rnorm(100))

@@ -130,7 +130,7 @@ diss.PRED = function( x, y, h, B=500, logarithm.x=FALSE, logarithm.y=FALSE,
           model <- models[[ser]]
         }
         stopifnot(!is.null(model))
-        preds <- replicate( n=B, simulate(model, nsim=k) )[k,]
+        preds <- replicate( n=B, simulate(model, nsim=k, bootstrap=TRUE) )[k,]
         auxiliary <- density( preds, bw=type.bw.forecast.dens)
         bw.k.prediction[ser] <- auxiliary$bw
         density.k.prediction[,,ser] <- cbind(auxiliary$x,auxiliary$y)
