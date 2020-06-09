@@ -991,7 +991,7 @@ wavelet.feature.extraction <- function(series) {
     
     energies <- matrix(0, nrow=nrow(series), ncol = max.level)
     for ( i in 1:nrow(series) ) {
-        wavdecomp <- wmtsa::wavDWT(series[i,], n.levels=max.level, wavelet="haar")
+       ###  wavdecomp <- wmtsa::wavDWT(series[i,], n.levels=max.level, wavelet="haar")
         energies[i,] <- calcEnergies(wavdecomp)
     }
     
@@ -1007,22 +1007,24 @@ wavelet.feature.extraction <- function(series) {
     wavdecomp <- wavDWT(series[1,], n.levels=final_level, wavelet="haar")
     out.series <- wavdecomp$data[[final_level+1]]
     for (i in 2:nrow(series)) {
-        wavdecomp <- wavDWT(series[i,], n.levels=final_level, wavelet="haar")
+        #wavdecomp <- wavDWT(series[i,], n.levels=final_level, wavelet="haar")
         out.series <- rbind(out.series, wavdecomp$data[[final_level+1]])
     }
     out.series
 }
 
 diss.DWT <- function(series) {
-    if ( length(dim(series)) == 2 ) {
-        if ( dim(series)[1] < 2 ) {
-            stop( "diss.DWT needs a minimum of 2 series to compute the distance, incorrect amount provided" )
-        }
-    } else {
-        stop( "diss.DWT series matrix with incorrect dimensions" ) 
-    }
-    wt <- wavelet.feature.extraction( series )
-    dist(wt)
+  warning("DWT Distance Temporarily not supported")
+  return(-1)
+    # if ( length(dim(series)) == 2 ) {
+    #     if ( dim(series)[1] < 2 ) {
+    #         stop( "diss.DWT needs a minimum of 2 series to compute the distance, incorrect amount provided" )
+    #     }
+    # } else {
+    #     stop( "diss.DWT series matrix with incorrect dimensions" ) 
+    # }
+    # wt <- wavelet.feature.extraction( series )
+    # dist(wt)
 }
 
 ##########################################################
