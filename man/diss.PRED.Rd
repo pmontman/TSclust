@@ -111,7 +111,4 @@ diss( rbind(x,y,z), METHOD="PRED", h=3, B=200,
 diss.PRED(x,y, h=5, models = list("ets", "arima"))
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
